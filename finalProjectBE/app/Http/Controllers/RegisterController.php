@@ -14,10 +14,10 @@ class RegisterController extends Controller
 
     public function store(Request $request){
         $validasi = $request->validate([
-            'name' => 'required|unique:users',
-            'noHp' => 'required',
+            'name' => 'required|unique:users|min:4|max:40',
+            'noHp' => 'required|min:10',
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|min:6|max:12'
         ]);
         $validasi['password'] = bcrypt($validasi['password']);
         User::create($validasi);
