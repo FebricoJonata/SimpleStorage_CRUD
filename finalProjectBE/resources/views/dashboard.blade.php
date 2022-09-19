@@ -15,7 +15,7 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
             <img src="/Assets/logo-website.png" alt="logo" width="35" class="d-inline-block align-text-top me-3">
-            Website</a>
+            Simple Storage</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -28,6 +28,45 @@
           </div>
       </div>
     </nav>
+
+    <div class="container col-lg-9">
+
+      <table class="table table-hover mt-4">
+        <h2 class="mt-1 mb-1">Simple Storage</h2>
+        <a href="/dashboard/create" class="btn btn-primary mt-2">Add New Items</a>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Jumlah</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($items as $item)
+          <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $item->kategori }}</td>
+            <td>{{ $item->nama }}</td>
+            <td>{{ $item->harga }}</td>
+            <td>{{ $item->jumlah }}</td>
+            <td>
+              <a href="/dashboard/{{ $item->id }}/edit" class="btn bg-warning"><i class="bi bi-pencil"></i></span></a>
+              <form action="/dashboard/{{ $item->id }}" method="POST" class="d-inline">
+                @method('delete')
+                @csrf
+                <button class="btn bg-danger border-0" onclick="return confirm('Are you sure to delete?')"><i class="bi bi-trash"></i></button>
+              </form>
+            </td>
+          </tr>    
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+
+    
     
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
